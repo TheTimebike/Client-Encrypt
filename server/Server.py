@@ -19,7 +19,7 @@ class Logging:
             with open("server_logs.txt", "a+") as out:
                 out.write(str(message) + "\n")
 
-Logging.log(generate_new_password("fruitcake"))
+Logging.log(generate_new_password("test"))
 
 disabled_md5_list = []
 if not os.path.isfile(root_file_path + "Client.exe"):
