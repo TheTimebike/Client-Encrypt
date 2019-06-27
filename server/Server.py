@@ -1,6 +1,4 @@
 import rsa, socket, sys, threading, re, bcrypt, time, json, hashlib, sys, os
-from .auth import Auth
-
 
 def generate_new_password(password):
     new_password = bcrypt.hashpw(str(password).encode("utf-8"),'$2b$12$RNX81nG9fLReXWMVEdmp8e'.encode("utf-8"))
@@ -31,8 +29,8 @@ if not os.path.isfile(root_file_path + "Client.app"):
 Logging.log(disabled_md5_list)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket_address = "localhost"
-socket_port = 12345
+socket_address = sys.argv[0]
+socket_port = sys.argv[1]
 try:
     s.bind((socket_address,socket_port))
 except socket.error as e:
@@ -122,7 +120,7 @@ def threaded_client(connection, address):
             
             decrypted_password = rsa.decrypt(connection.recv(1024), server_private)
             # Pull the comparative value from a JSON file.
-            if decrypted_password.decode() != Auth.hashed_password:
+            if decrypted_password.decode() != generate_new_password("test"):
                 connection.close()
                	Logging.log("Connection to {0} Denied Due To Incorrect Password.".format(connection_name))
                 return 
