@@ -121,7 +121,7 @@ def threaded_client(connection, address):
             
             decrypted_password = rsa.decrypt(connection.recv(1024), server_private)
             # Pull the comparative value from a JSON file.
-            if decrypted_password.decode() != generate_new_password("test"):
+            if decrypted_password.decode() != generate_new_password("test").decode():
                 connection.close()
                	Logging.log("Connection to {0} Denied Due To Incorrect Password.".format(connection_name))
                 return 
