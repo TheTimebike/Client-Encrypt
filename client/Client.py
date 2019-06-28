@@ -1,4 +1,4 @@
-import socket, sys, threading, re, time, bcrypt os, json, hashlib
+import socket, sys, threading, re, time, bcrypt, os, json, hashlib, rsa
 from tkinter import *
 
 class Logging:
@@ -163,7 +163,7 @@ class Window(Frame):
     def file_btn_connect_command(self, en=None):
         if not self.connected:
             (self.client_public, self.client_private) = rsa.newkeys(1024)
-            self.socket = SocketHandler.start("localhost", 12345)
+            self.socket = SocketHandler.start("192.168.0.0", 12345)
             self.main_thread = threading.Thread(target=Security.verify_connection, args=(self.socket, self.client_public, self.client_private)) 
             self.main_thread.daemon = True
             self.main_thread.start()

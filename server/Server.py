@@ -36,6 +36,7 @@ try:
 except socket.error as e:
     Logging.log(e)
 
+Logging.log(s.getsockname()[0])
 s.listen(max_connections)
 
 Logging.log("Waiting for connections")
