@@ -17,7 +17,7 @@ class Logging:
             with open("server_logs.txt", "a+") as out:
                 out.write(str(message) + "\n")
 
-Logging.log(generate_new_password("test"))
+#Logging.log(generate_new_password("test"))
 
 disabled_md5_list = []
 if not os.path.isfile(root_file_path + "Client.exe"):
@@ -121,7 +121,7 @@ def threaded_client(connection, address):
             
             decrypted_password = rsa.decrypt(connection.recv(1024), server_private)
             # Pull the comparative value from a JSON file.
-            if decrypted_password.decode() != generate_new_password("test").decode():
+            if decrypted_password.decode() != generate_new_password(sys.argv[3]).decode():
                 connection.close()
                	Logging.log("Connection to {0} Denied Due To Incorrect Password.".format(connection_name))
                 return 
