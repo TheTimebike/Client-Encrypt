@@ -128,7 +128,7 @@ def threaded_client(connection, address):
             
             Logging.log("Connection to {0} Verified.".format(connection_name))
             return_data = rsa.encrypt("RSA Verified. Securely Connected to the server.".encode(), connection_public)    
-            connection.sendall(returnData)
+            connection.sendall(return_data)
             Messaging.server_announce_to_all("{0} Has Joined.".format(connection_name), "<INTERNAL:-USER_JOIN:>")
 
         ip = "{0}:{1}".format(address[0], address[1])
