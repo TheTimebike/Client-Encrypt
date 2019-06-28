@@ -30,7 +30,7 @@ Logging.log(disabled_md5_list)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket_address = sys.argv[0]
-socket_port = sys.argv[1]
+socket_port = int(sys.argv[1])
 try:
     s.bind((socket_address,socket_port))
 except socket.error as e:
